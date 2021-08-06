@@ -37,3 +37,8 @@ test('Não deve aplicar cupom de desconto expirado', () => {
     const total = order.getTotal();
     expect(total).toBe(7090);
 });
+
+test('Deve gerar o código do pedido', () => {
+    const cpf = '778.278.412-36';
+    const order = new Order(cpf);
+});

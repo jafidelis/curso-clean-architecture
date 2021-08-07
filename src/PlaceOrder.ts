@@ -1,6 +1,7 @@
 import Coupon from "./Coupon";
 import FreightCalculator from "./FreightCalculator";
 import Item from "./Item";
+import NumberOrderGenerator from "./NumberOrderGenerator";
 import Order from "./Order";
 import PlaceOrderInput from "./PlaceOrderInput";
 import PlaceOrderOutput from "./PlaceOrderOutput";
@@ -44,10 +45,12 @@ export default class PlaceOrder {
             }
         }
         const total = order.getTotal();
+        order.orderNumber = NumberOrderGenerator.generate(0);
         this.orders.push(order);
         return new PlaceOrderOutput({
             freight: order.freight,
-            total
+            total,
+            orderNumber: order.orderNumber
         });
     }
 }

@@ -3,7 +3,7 @@ import Cpf from "./cpf";
 import OrderItem from "./OrderItem";
 
 export default class Order {
-    orderNumber: string;
+    orderNumber?: string;
     cpf: Cpf;
     itens: OrderItem[] = [];
     coupon: Coupon | undefined;
@@ -12,15 +12,8 @@ export default class Order {
     constructor(cpf: string) {
         this.cpf = new Cpf(cpf);
         this.freight = 0;
-        this.orderNumber = this.generateOrderNumber();
     }
-    
-    private generateOrderNumber(): string {
-        const ano = new Date().getFullYear();
-        
-        throw new Error("Method not implemented.");
-    }
-    
+
     addItem(description: string, price: number, quantity: number) {
         this.itens.push(new OrderItem(description, price, quantity));
     }
@@ -30,7 +23,7 @@ export default class Order {
             this.coupon = coupon;
         }
     }
-    
+
     getTotal() {
         let total = 0;
         this.itens.forEach(i => total += i.getTotal());

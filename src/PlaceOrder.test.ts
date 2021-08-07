@@ -48,3 +48,19 @@ test('Deve fazer um pedido com cálculo de frete', () => {
     const output = placeOrder.execute(input);
     expect(output.freight).toBe(310);
 });
+
+test('Deve fazer um pedido com código do pedido', () => {
+    const input = new PlaceOrderInput({
+        cpf: '778.278.412-36',
+        zipcode: '11.111-11',
+        items: [
+            { itemId: "1", price: 1000, quantity: 2},
+            { itemId: "2", price: 5000, quantity: 1},
+            { itemId: "3", price: 30, quantity: 3}
+        ],
+        coupon: 'VALE15'
+    });
+    const placeOrder = new PlaceOrder();
+    const output = placeOrder.execute(input);
+    expect(output.orderNumber).toEqual(`${new Date().getFullYear()}00000001`);
+});
